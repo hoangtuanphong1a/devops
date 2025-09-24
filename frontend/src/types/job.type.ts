@@ -7,12 +7,14 @@ export interface Job {
   slug: string;
   title: string;
   company: string;
+  logo?: string;
   location: string;
   type: string;   // Toàn thời gian | Bán thời gian | Hợp đồng
   mode: string;   // Remote | Hybrid | Văn phòng
   level: string;  // Junior | Mid | Senior
   salaryMin: string;
   salaryMax: string;
+  salary?: string;
   salaryCurrency: Currency;
   description: string;
   requirements: string;

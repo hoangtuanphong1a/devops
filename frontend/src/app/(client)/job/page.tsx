@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Search,
   MapPin,
@@ -13,6 +14,22 @@ import {
   Star,
 } from "lucide-react";
 import BreadcrumbTabActive from "@/components/ui/common/breadcrumb/BreadcrumbTabActive";
+
+interface Job {
+  id: number;
+  title: string;
+  company: string;
+  logo: string;
+  location: string;
+  salary: string;
+  type: string;
+  experience: string;
+  posted: string;
+  tags: string[];
+  description: string;
+  urgent: boolean;
+  featured: boolean;
+}
 
 const JobsPage = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -158,24 +175,11 @@ const JobsPage = () => {
     return pageNumbers;
   };
 
-  const handleJobClick = (job: any) => {
+  const handleJobClick = (job: Job) => {
     console.log("Chuyển đến chi tiết công việc:", job);
   };
 
-  // Helper function to handle image error
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>
-  ) => {
-    const target = e.target as HTMLImageElement;
-    target.src = `data:image/svg+xml;base64,${btoa(`
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="64" height="64" rx="8" fill="#f26b38"/>
-        <path d="M32 16C36.4183 16 40 19.5817 40 24V40C40 44.4183 36.4183 48 32 48C27.5817 48 24 44.4183 24 40V24C24 19.5817 27.5817 16 32 16ZM32 20C29.7909 20 28 21.7909 28 24V40C28 42.2091 29.7909 44 32 44C34.2091 44 36 42.2091 36 40V24C36 21.7909 34.2091 20 32 20Z" fill="white"/>
-      </svg>
-    `)}`;
-  };
-
-  const JobCard = ({ job, mode }: { job: any; mode: "grid" | "list" }) => (
+  const JobCard = ({ job, mode }: { job: Job; mode: "grid" | "list" }) => (
     <div
       className={`group bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer relative ${
         mode === "grid" ? "flex flex-col h-full" : "flex items-center"
@@ -194,11 +198,12 @@ const JobsPage = () => {
           {/* Left section - Logo, Title, Company */}
           <div className="flex items-center gap-4 flex-shrink-0 w-80">
             <div className="flex-shrink-0">
-              <img
+              <Image
                 src={job.logo}
                 alt={job.company}
+                width={64}
+                height={64}
                 className="w-16 h-16 rounded-lg object-cover"
-                onError={handleImageError}
               />
             </div>
             <div className="flex-1 min-w-0">
@@ -262,11 +267,12 @@ const JobsPage = () => {
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3 flex-1 min-w-0">
               <div className="flex-shrink-0">
-                <img
+                <Image
                   src={job.logo}
                   alt={job.company}
+                  width={48}
+                  height={48}
                   className="w-12 h-12 rounded-lg object-cover"
-                  onError={handleImageError}
                 />
               </div>
               <div className="flex-1 min-w-0">

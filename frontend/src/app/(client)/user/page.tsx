@@ -1,4 +1,3 @@
-import InforUser from "@/components/ui/client/user/InforUser";
 import MenuTabs from "@/components/ui/client/user/MenuTabs";
 const UserPage = () => {
     return (

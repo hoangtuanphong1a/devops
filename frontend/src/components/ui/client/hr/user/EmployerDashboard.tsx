@@ -3,7 +3,8 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import { ArrowLeft, X, Menu, Briefcase, Building2, Settings, Star, TrendingUp, Users } from 'lucide-react';
 import { useState } from 'react';
-import { useApp } from '@/components/AppContext';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/lib/routes';
 import Setting from './Setting';
 import CompanyProfile from './CompanyProfile';
 import JobPostings from './JobPostings';
@@ -12,7 +13,7 @@ import SavedCandidates from './SavedCandidates';
 import Overview from './Overview';
 
 const EmployerDashboard = () => {
-    const { navigateTo } = useApp();
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState('overview');
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -61,7 +62,7 @@ const EmployerDashboard = () => {
                         <Button
                             variant="text"
                             size="small"
-                            onClick={() => navigateTo('home')}
+                            onClick={() => router.push(ROUTES.HOME)}
                             className="mr-2"
                         >
                             <ArrowLeft className="w-4 h-4" />
@@ -114,7 +115,7 @@ const EmployerDashboard = () => {
                     <Button
                         variant="text"
                         size="small"
-                        onClick={() => navigateTo('home')}
+                        onClick={() => router.push(ROUTES.HOME)}
                     >
                         <ArrowLeft className="w-5 h-5" />
                     </Button>

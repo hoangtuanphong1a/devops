@@ -3,10 +3,34 @@ import { CardContent, Card } from "@/lib/card";
 import { Button } from "@/lib/button";
 import { Badge } from "@/lib/badge";
 import { MapPin, Users, Star } from "lucide-react";
-import { ImageWithFallback } from "@/lib/ImageWithFallback";
-import { AppProvider, useApp } from "@/components/AppContext";
+// import { useApp } from "@/components/AppContext";
 import Image from "next/image";
 import company from "@/assets/images/employee.png";
+import { useRouter } from "next/navigation";
+
+import type { StaticImageData } from "next/image";
+
+interface Company {
+  id: number;
+  name: string;
+  logo: string | StaticImageData;
+  industry: string;
+  location: string;
+  employees: string;
+  rating: number;
+  openJobs: number;
+  description: string;
+  founded: string;
+  website: string;
+  benefits: string[];
+  culture: string;
+}
+
+type Params = {
+  company?: { id: number };
+  search?: string;
+  filters?: { company?: string };
+};
 const CompaniesSection = () => {
   const { navigateTo } = useApp();
 
@@ -104,11 +128,11 @@ const CompaniesSection = () => {
       culture: 'Môi trường nghiên cứu, khuyến khích đổi mới và học hỏi liên tục.'
     }];
 
-  const handleCompanyClick = (company: any) => {
+  const handleCompanyClick = (company: Company) => {
     navigateTo('company-detail', { company });
   };
 
-  const handleViewJobs = (e: React.MouseEvent, company: any) => {
+  const handleViewJobs = (e: React.MouseEvent, company: Company) => {
     e.stopPropagation();
     navigateTo('jobs', {
       search: company.name,
@@ -208,3 +232,25 @@ const CompaniesSection = () => {
 };
 
 export default CompaniesSection;
+function useApp(): { navigateTo: (route: string, params?: Params) => void } {
+  const router = useRouter();
+
+  const navigateTo = (route: string, params?: Params) => {
+    // Example route handling logic
+    switch (route) {
+      case "company-detail":
+        router.push(`/companies/${params?.company?.id}`);
+        break;
+      case "jobs":
+        router.push(`/jobs?search=${encodeURIComponent(params?.search || "")}&company=${encodeURIComponent(params?.filters?.company || "")}`);
+        break;
+      case "companies":
+        router.push("/companies");
+        break;
+      default:
+        router.push("/");
+    }
+  };
+
+  return { navigateTo };
+}

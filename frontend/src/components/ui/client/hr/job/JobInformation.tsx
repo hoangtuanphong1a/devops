@@ -134,6 +134,7 @@ const JobInformation = () => {
                 </div>
             </div>
         </section>
+    );
+};
 
-    )
-}
+export default JobInformation;

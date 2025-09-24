@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Bookmark, Clock, DollarSign, MapPin, Star } from "lucide-react";
 import { Job } from "@/types/job.type"; // Assuming the type file is created
 
@@ -11,17 +12,7 @@ interface JobCardProps {
   onJobClick: (job: Job) => void; // Renamed for clarity (e.g., handleJobClick -> onJobClick)
 }
 
-// Helper function to handle broken image links
-const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-  const target = e.target as HTMLImageElement;
-  // Fallback to a generic SVG icon
-  target.src = `data:image/svg+xml;base64,${btoa(`
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="64" height="64" rx="8" fill="#f26b38"/>
-      <path d="M32 16C36.4183 16 40 19.5817 40 24V40C40 44.4183 36.4183 48 32 48C27.5817 48 24 44.4183 24 40V24C24 19.5817 27.5817 16 32 16ZM32 20C29.7909 20 28 21.7909 28 24V40C28 42.2091 29.7909 44 32 44C34.2091 44 36 42.2091 36 40V24C36 21.7909 34.2091 20 32 20Z" fill="white"/>
-    </svg>
-  `)}`;
-};
+
 
 const JobCard = ({ job, mode, onJobClick }: JobCardProps) => {
   // Grid View Layout
@@ -29,11 +20,12 @@ const JobCard = ({ job, mode, onJobClick }: JobCardProps) => {
     <div className="p-6 flex flex-col h-full">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <img
-            src={job.logo}
+          <Image
+            src={job.logo || ""}
             alt={`${job.company} logo`}
+            width={48}
+            height={48}
             className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
-            onError={handleImageError}
           />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
@@ -72,12 +64,12 @@ const JobCard = ({ job, mode, onJobClick }: JobCardProps) => {
 
         <div className="mb-4">
           <div className="flex flex-wrap gap-2 min-h-[32px] items-start">
-            {job.tags.slice(0, 3).map((tag) => (
+            {job.skills.slice(0, 3).map((skill) => (
               <span
-                key={tag}
+                key={skill}
                 className="bg-orange-50 text-[#f26b38] text-xs px-2 py-1 rounded-full font-medium"
               >
-                {tag}
+                {skill}
               </span>
             ))}
           </div>
@@ -109,11 +101,12 @@ const JobCard = ({ job, mode, onJobClick }: JobCardProps) => {
   const ListView = () => (
     <div className="p-6 w-full flex items-center min-h-[120px]">
       <div className="flex items-center gap-4 flex-shrink-0 w-80">
-        <img
-          src={job.logo}
+        <Image
+          src={job.logo || ""}
           alt={`${job.company} logo`}
+          width={64}
+          height={64}
           className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
-          onError={handleImageError}
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
@@ -146,12 +139,12 @@ const JobCard = ({ job, mode, onJobClick }: JobCardProps) => {
           </div>
         </div>
         <div className="flex flex-wrap gap-2 mt-3">
-          {job.tags.slice(0, 3).map((tag) => (
+          {job.skills.slice(0, 3).map((skill) => (
             <span
-              key={tag}
+              key={skill}
               className="bg-orange-50 text-[#f26b38] text-xs px-2 py-1 rounded-full font-medium"
             >
-              {tag}
+              {skill}
             </span>
           ))}
         </div>

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import BreadcrumbTabActive from "@/components/ui/common/breadcrumb/BreadcrumbTabActive";
 
 const DetailedPostPage = () => {
@@ -201,11 +202,12 @@ const DetailedPostPage = () => {
       {/* Banner Header Section */}
       <div className="max-w-7xl mx-auto px-4 mb-8">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="relative">
-            <img
+          <div className="relative h-64">
+            <Image
+              fill
               src={postHeader.image}
               alt="Post banner"
-              className="w-full h-64 object-cover"
+              className="object-cover"
             />
             <span className="absolute top-4 left-4 bg-orange-100 text-orange-600 text-sm font-semibold px-3 py-1 rounded-full">
               {postHeader.category}

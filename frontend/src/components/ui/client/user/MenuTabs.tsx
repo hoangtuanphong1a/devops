@@ -1,12 +1,9 @@
 "use client";
-import { Link } from "lucide-react";
-import React ,{useState} from "react";
+import React from "react";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import CompaniesSection from "../home/CompaniesSection";
 import InforUser from "./InforUser";
-import { useForm } from 'react-hook-form';
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -42,23 +39,11 @@ const MenuTabs = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-     const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({
-    });
-    const handleEditToggle = () => {
-        setIsEditing(!isEditing);
-    };
-    const handleSave = (updatedData: z.infer<typeof formSchemaPersonal>) => {
-        setFormData((prevData) => ({ ...prevData, ...updatedData }));
-        setIsEditing(false);
-    };
      // Danh sách các tab
   const tabList = [
     { label: 'Việc làm', content:<></> },
     { label: 'Quản lí CV & Cover letter', content: 'Nội dung cho tab Quản lí CV & Cover letter' },
-    { label: 'Hồ sơ cá nhân', content: <InforUser  isEditing={isEditing}
-                data={formData}
-                onSave={handleSave}/> },
+    { label: 'Hồ sơ cá nhân', content: <InforUser /> },
     { label: 'Đăng xuất', content: 'Nội dung cho tab Đăng Xuất' },
   ];
   return (

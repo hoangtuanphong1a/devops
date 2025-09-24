@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   MapPin,
   DollarSign,
@@ -55,28 +56,17 @@ export default function JobHeader({
     }
   };
 
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>
-  ) => {
-    const target = e.target as HTMLImageElement;
-    target.src = `data:image/svg+xml;base64,${btoa(`
-      <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="96" height="96" rx="12" fill="#f26b38"/>
-        <path d="M48 24C54.6274 24 60 29.3726 60 36V60C60 66.6274 54.6274 72 48 72C41.3726 72 36 66.6274 36 60V36C36 29.3726 41.3726 24 48 24ZM48 30C44.6863 30 42 32.6863 42 36V60C42 63.3137 44.6863 66 48 66C51.3137 66 54 63.3137 54 60V36C54 32.6863 51.3137 30 48 30Z" fill="white"/>
-      </svg>
-    `)}`;
-  };
-
   return (
     <div className="bg-white rounded-lg shadow-sm border p-6">
       <div className="flex items-start justify-between mb-6">
         <div className="flex items-start gap-4 flex-1">
           <div className="flex-shrink-0">
-            <img
+            <Image
               src={job.logo}
               alt={job.company}
+              width={64}
+              height={64}
               className="w-16 h-16 rounded-lg object-cover"
-              onError={handleImageError}
             />
           </div>
           <div className="flex-1 min-w-0">

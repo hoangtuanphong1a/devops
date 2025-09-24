@@ -1,13 +1,13 @@
 // Layout.js
 import { ClientLayout } from '@/components/layout/MainLayout';
 import React from 'react';
-import { AppProvider } from "@/components/AppContext";
+import Providers from '../providers';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return <ClientLayout>
-<AppProvider>
+<Providers>
         {children}
-</AppProvider>
+</Providers>
     </ClientLayout>;
 
 };

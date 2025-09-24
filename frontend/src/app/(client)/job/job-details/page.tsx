@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import BreadcrumbTabActive from "@/components/ui/common/breadcrumb/BreadcrumbTabActive";
 import JobHeader from "@/components/ui/client/job/job-details/JobHeader";
 import JobContent from "@/components/ui/client/job/job-details/JobContent";
@@ -8,17 +9,15 @@ import CompanySidebar from "@/components/ui/client/job/job-details/CompanySideba
 import RelatedJobsSidebar from "@/components/ui/client/job/job-details/RelatedJobsSidebar";
 import ApplyModal from "@/components/ui/client/job/job-details/ApplyModal";
 
-interface JobDetailPageProps {
-  jobId: string | null;
-  navigate?: (page: string, id?: string) => void;
-}
+interface JobDetailPageProps {}
 
-export default function JobDetailPage({ jobId, navigate }: JobDetailPageProps) {
+export default function JobDetailPage() {
+  const router = useRouter();
   const [showApplyModal, setShowApplyModal] = useState(false);
 
   // Mock job data
   const job = {
-    id: jobId || "1",
+    id: "1",
     title: "Lập Trình Viên Frontend Senior",
     company: "TechCorp Vietnam",
     logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=96&h=96&fit=crop&crop=face",
@@ -120,9 +119,7 @@ Bạn sẽ chịu trách nhiệm xây dựng và duy trì các ứng dụng web 
 
   const handleApply = () => {
     setShowApplyModal(false);
-    if (navigate) {
-      navigate("cv-builder");
-    }
+    router.push('/user');
   };
 
   return (
@@ -142,7 +139,7 @@ Bạn sẽ chịu trách nhiệm xây dựng và duy trì các ứng dụng web 
         {/* Back button */}
         <div className="flex items-center mb-6">
           <button
-            onClick={() => navigate?.("jobs")}
+            onClick={() => router.push('/job')}
             className="flex items-center text-gray-600 hover:text-[#f26b38] transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -156,7 +153,7 @@ Bạn sẽ chịu trách nhiệm xây dựng và duy trì các ứng dụng web 
             <JobHeader
               job={job}
               onApply={() => setShowApplyModal(true)}
-              onViewCompany={() => navigate?.("company-detail", "1")}
+              onViewCompany={() => router.push('/company/1')}
             />
             <JobContent job={job} />
           </div>
@@ -165,12 +162,12 @@ Bạn sẽ chịu trách nhiệm xây dựng và duy trì các ứng dụng web 
           <div className="lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] lg:overflow-y-auto space-y-6">
             <CompanySidebar
               companyInfo={job.companyInfo}
-              onViewCompanyDetail={() => navigate?.("company-detail", "1")}
+              onViewCompanyDetail={() => router.push('/company/1')}
             />
             <RelatedJobsSidebar
               relatedJobs={relatedJobs}
-              onJobClick={(id) => navigate?.("job-detail", id)}
-              onViewMore={() => navigate?.("jobs")}
+              onJobClick={(id) => router.push('/job')}
+              onViewMore={() => router.push('/job')}
             />
           </div>
         </div>

@@ -134,11 +134,16 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Bold } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button, Stack } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Link from "next/link";
-import { orange } from "@mui/material/colors";
+
+interface StatsCardProps {
+    id: number;
+    number: string;
+    description: string;
+}
 
 const HeroSection = () => {
     const statsData = [
@@ -149,7 +154,7 @@ const HeroSection = () => {
         { id: 5, number: "1,200", description: "Việc làm mới nhất" },
     ];
 
-    const StatsCard = ({ card }: { card: any }) => {
+    const StatsCard = ({ card }: { card: StatsCardProps }) => {
         return (
             <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6 border border-gray-100 w-[200px] h-[200px]">
                 <div className="flex flex-col items-center text-center h-full justify-center">

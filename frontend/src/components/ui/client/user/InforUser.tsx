@@ -15,9 +15,7 @@ import {
     Box,
     InputLabel,
     Button,
-    Avatar,
     Typography,
-    Input,
 } from "@mui/material";
 import Image from "next/image";
 
@@ -145,38 +143,14 @@ export const formSchemaPersonal = z.object({
         }),
 });
 
-// Định nghĩa kiểu cho props
-interface PersonalInforProps {
-    isEditing: boolean;
-    data: {
-        username?: string;
-        phonenumber?: string;
-        birthday?: Date;
-        sex?: "Nam" | "Nu";
-        hometown?: string;
-        nationality?: string;
-        carrergoals?: string;
-        salary?: string;
-        workplace?: string;
-        occupation?: string;
-        format?: "Online" | "Offline";
-        experience?: string;
-        level?: string;
-        educationlevel?: string;
-        degree?: string;
-        professionalskill?: "Nam" | "Nu";
-        keyAccompl?: string;
-        otherActions?: string;
-    };
-    onSave: (data: z.infer<typeof formSchemaPersonal>) => void;
-}
+type FormDataType = z.infer<typeof formSchemaPersonal>;
 
-const InforUser = (PersonalInforProps) => {
+const InforUser = () => {
 
     const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormDataType>({
 
-    });
+    } as FormDataType);
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
