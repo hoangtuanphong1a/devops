@@ -50,10 +50,15 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build & Push Next.js Docker Image
-        run: |
-         docker buildx build \
-        --load \
-           --platform linux/amd64 \
+  env:
+    NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+    NEXT_PUBLIC_ADMIN_URL: ${{ secrets.NEXT_PUBLIC_ADMIN_URL }}
+  run: |
+    docker buildx build \
+      --load \
+      --platform linux/amd64 \
+      --build-arg NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
+      --build-arg NEXT_PUBLIC_ADMIN_URL=${NEXT_PUBLIC_ADMIN_URL} \
       -t hoangtuanphong/myapp-frontend:latest .
 
     docker push hoangtuanphong/myapp-frontend:latest
