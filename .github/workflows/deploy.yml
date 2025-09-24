@@ -69,8 +69,8 @@ jobs:
             cd project
 
             # Tạo .env từ secret
-            # echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" > .env
-            # echo "NEXT_PUBLIC_ADMIN_URL=${{ secrets.NEXT_PUBLIC_ADMIN_URL }}" >> .env
+            echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" > .env
+            echo "NEXT_PUBLIC_ADMIN_URL=${{ secrets.NEXT_PUBLIC_ADMIN_URL }}" >> .env
 
             # Write docker-compose file
             echo "${{ secrets.DOCKER_COMPOSE_FILE }}" > docker-compose.yml
