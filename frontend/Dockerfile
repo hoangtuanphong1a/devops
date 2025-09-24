@@ -32,7 +32,7 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 
 # Expose the port
-EXPOSE 3005
+EXPOSE 3000
 
 # Start the app
 CMD ["node", "server.js"]
