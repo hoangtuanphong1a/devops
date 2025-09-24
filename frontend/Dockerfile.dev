@@ -1,0 +1,25 @@
+# ---------- Development Docker image ----------
+FROM node:20-alpine
+
+# Enable pnpm
+RUN corepack enable
+WORKDIR /app
+
+# Build-time environment variables (from build args)
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# Copy source code
+COPY . .
+
+# Expose the port
+EXPOSE 3000
+
+# Start the development server (will bind to 0.0.0.0 due to --hostname flag)
+CMD ["pnpm", "dev"]
