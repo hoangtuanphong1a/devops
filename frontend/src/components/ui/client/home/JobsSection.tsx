@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import employee from "@/assets/images/employee.png";
 import {
   Bookmark,
@@ -267,11 +267,23 @@ const JobsSection = () => {
   );
 };
 
-export default JobsSection;
 type Job = {
   id: number;
-  [key: string]: any;
+  title: string;
+  company: string;
+  logo: StaticImageData;
+  location: string;
+  salary: string;
+  type: string;
+  posted: string;
+  tags: string[];
+  featured: boolean;
+  description: string;
+  requirements: string[];
+  benefits: string[];
 };
+
+export default JobsSection;
 
 function useApp(): { navigateTo: (route: string, params?: { job?: Job }) => void } {
   return {

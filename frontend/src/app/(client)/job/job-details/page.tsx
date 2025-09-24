@@ -9,8 +9,6 @@ import CompanySidebar from "@/components/ui/client/job/job-details/CompanySideba
 import RelatedJobsSidebar from "@/components/ui/client/job/job-details/RelatedJobsSidebar";
 import ApplyModal from "@/components/ui/client/job/job-details/ApplyModal";
 
-interface JobDetailPageProps {}
-
 export default function JobDetailPage() {
   const router = useRouter();
   const [showApplyModal, setShowApplyModal] = useState(false);
@@ -166,7 +164,7 @@ Bạn sẽ chịu trách nhiệm xây dựng và duy trì các ứng dụng web 
             />
             <RelatedJobsSidebar
               relatedJobs={relatedJobs}
-              onJobClick={(id) => router.push('/job')}
+              onJobClick={() => router.push('/job')}
               onViewMore={() => router.push('/job')}
             />
           </div>
